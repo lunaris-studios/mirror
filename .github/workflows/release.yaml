@@ -7,6 +7,7 @@ jobs:
   setup:
     name: Setup
     runs-on: ubuntu-18.04
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     steps:
       - name: Checkout
         id: setup-1
@@ -35,6 +36,7 @@ jobs:
     name: Test
     needs: setup
     runs-on: ubuntu-18.04
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     steps:
       - name: Checkout
         id: test-1
@@ -82,6 +84,7 @@ jobs:
     name: Build
     needs: test
     runs-on: ubuntu-18.04
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     steps:
       - name: Checkout
         id: build-1
@@ -126,6 +129,7 @@ jobs:
     name: Release
     needs: build
     runs-on: ubuntu-18.04
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     steps:
       - name: Checkout
         id: release-1
